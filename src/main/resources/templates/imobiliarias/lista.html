@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <title>Imobiliarias</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <a th:href="@{/}">Cliente REST &middot; Imobiliaria</a>
+</header>
+<main>
+    <div th:if="${sucesso}" class="alerta alerta-sucesso" th:text="${sucesso}"></div>
+    <div th:if="${erro}" class="alerta alerta-erro" th:text="${erro}"></div>
+
+    <div class="barra-topo">
+        <h1 style="margin:0">Imobiliarias</h1>
+        <a class="btn btn-azul" th:href="@{/imobiliarias/novo}">+ Nova imobiliaria</a>
+    </div>
+
+    <div th:if="${imobiliarias.isEmpty()}" class="vazio">
+        Nenhuma imobiliaria cadastrada.
+    </div>
+
+    <table th:unless="${imobiliarias.isEmpty()}">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>CNPJ</th>
+            <th style="width:1%">Acoes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="imob : ${imobiliarias}">
+            <td th:text="${imob.id}">1</td>
+            <td><a th:href="@{/imobiliarias/{id}(id=${imob.id})}" th:text="${imob.nome}">Nome</a></td>
+            <td th:text="${imob.email}">email</td>
+            <td th:text="${imob.cnpj}">cnpj</td>
+            <td>
+                <div class="acoes">
+                    <a class="btn btn-cinza btn-sm" th:href="@{/imobiliarias/{id}/editar(id=${imob.id})}">Editar</a>
+                    <form th:action="@{/imobiliarias/{id}/remover(id=${imob.id})}" method="post"
+                          onsubmit="return confirm('Remover esta imobiliaria?');" style="margin:0">
+                        <button type="submit" class="btn btn-vermelho btn-sm">Excluir</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

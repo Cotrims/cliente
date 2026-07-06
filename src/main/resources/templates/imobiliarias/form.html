@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <title th:text="${modo == 'novo'} ? 'Nova imobiliaria' : 'Editar imobiliaria'">Imobiliaria</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <a th:href="@{/}">Cliente REST &middot; Imobiliaria</a>
+</header>
+<main>
+    <h1 th:text="${modo == 'novo'} ? 'Nova imobiliaria' : 'Editar imobiliaria'">Imobiliaria</h1>
+
+    <!-- POST /imobiliarias (criar) ou POST /imobiliarias/{id} (atualizar) -->
+    <form class="card" method="post"
+          th:action="${modo == 'novo'} ? @{/imobiliarias} : @{/imobiliarias/{id}(id=${imobiliaria.id})}"
+          th:object="${imobiliaria}">
+
+        <div class="campo">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" th:field="*{nome}" required>
+        </div>
+
+        <div class="campo">
+            <label for="email">Email</label>
+            <input type="email" id="email" th:field="*{email}" required>
+        </div>
+
+        <div class="campo">
+            <label for="cnpj">CNPJ</label>
+            <input type="text" id="cnpj" th:field="*{cnpj}" required>
+        </div>
+
+        <div class="campo">
+            <label for="descricao">Descricao</label>
+            <textarea id="descricao" rows="3" th:field="*{descricao}"></textarea>
+        </div>
+
+        <div class="campo">
+            <label for="password">Senha</label>
+            <input type="password" id="password" th:field="*{password}"
+                   th:required="${modo == 'novo'}">
+            <small th:if="${modo != 'novo'}">Deixe em branco para manter a senha atual.</small>
+        </div>
+
+        <div class="acoes">
+            <button type="submit" class="btn btn-azul">Salvar</button>
+            <a class="btn btn-cinza" th:href="@{/imobiliarias}">Cancelar</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

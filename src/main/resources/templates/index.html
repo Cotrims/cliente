@@ -1,0 +1,25 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+  <head>
+    <title>Cliente REST - Imobiliarias</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <header>
+      <a th:href="@{/}">Cliente REST &middot; Imobiliaria</a>
+    </header>
+    <main>
+      <h1>Cliente da API REST 'imobiliaria'</h1>
+      <div class="card">
+        <p>Aplicação cliente que consome a API REST do servidor</p>
+        <p style="margin-top: 1rem">
+          <a class="btn btn-azul" th:href="@{/imobiliarias}"
+            >Gerenciar Imobiliarias (CRUD)</a
+          >
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

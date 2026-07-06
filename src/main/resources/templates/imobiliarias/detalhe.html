@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <title>Detalhe da imobiliaria</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <a th:href="@{/}">Cliente REST &middot; Imobiliaria</a>
+</header>
+<main>
+    <div class="barra-topo">
+        <h1 style="margin:0" th:text="${imobiliaria.nome}">Nome</h1>
+        <a class="btn btn-cinza" th:href="@{/imobiliarias}">Voltar</a>
+    </div>
+
+    <div class="card">
+        <dl>
+            <dt>Id</dt><dd th:text="${imobiliaria.id}">1</dd>
+            <dt>Nome</dt><dd th:text="${imobiliaria.nome}">Nome</dd>
+            <dt>Email</dt><dd th:text="${imobiliaria.email}">email</dd>
+            <dt>CNPJ</dt><dd th:text="${imobiliaria.cnpj}">cnpj</dd>
+            <dt>Descricao</dt><dd th:text="${imobiliaria.descricao}">descricao</dd>
+            <dt>Role</dt><dd th:text="${imobiliaria.role}">role</dd>
+        </dl>
+        <div class="acoes" style="margin-top:1.25rem">
+            <a class="btn btn-azul" th:href="@{/imobiliarias/{id}/editar(id=${imobiliaria.id})}">Editar</a>
+            <form th:action="@{/imobiliarias/{id}/remover(id=${imobiliaria.id})}" method="post"
+                  onsubmit="return confirm('Remover esta imobiliaria?');" style="margin:0">
+                <button type="submit" class="btn btn-vermelho">Excluir</button>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>
